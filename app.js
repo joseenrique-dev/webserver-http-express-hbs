@@ -11,7 +11,10 @@ const hbs = require('hbs');
 app.set('view engine', 'hbs');
 
 app.get('/', function (req, resp) {
-    resp.render('home');
+    resp.render('home', {
+        title: 'Home',
+        message: 'Node course'
+        });
 })
 
 
