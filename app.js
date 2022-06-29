@@ -1,19 +1,22 @@
 const express = require('express')
 const app = express()
-const port = 8080;
 const hbs = require('hbs');
+const port = process.env.PORT || 8082;
+console.log(`ENV ${process.env}`);
+// Register Partials
+app.set('view engine', 'hbs');
 
 //Serve static content from public folder
 app.use(express.static('public'));
 
+//Set view engine to handlebars
 hbs.registerPartials(__dirname + '/views/partials', function(err) {
     if (err) {
         console.log(err);
     }
 });
 
-app.set('view engine', 'hbs');
-
+//Created relatives routes
 app.get('/', function (req, resp) {
     resp.render('home', {
         title: 'Home',
