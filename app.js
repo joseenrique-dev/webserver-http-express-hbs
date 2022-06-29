@@ -1,6 +1,24 @@
-const http  =require('http');
+const express = require('express')
+const app = express()
+const port = 8080;
 
-http.createServer(function(req,res){
-    res.writeHead(200,{'Content-Type':'text/html'});
-    res.end('<h1>Hello World</h1>');
-}).listen(3000,'localhost');
+//Serve static content from public folder
+app.use(express.static('public'));
+
+
+
+app.get('/', function (req, res) {
+  res.send('Hello World')
+})
+
+app.get('/hola-mundo', function (req, res) {
+  res.send('Hello World in his own route')
+})
+
+app.get('*', function (req, res) {
+    res.sendFile(__dirname+'/public/404.html');
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
